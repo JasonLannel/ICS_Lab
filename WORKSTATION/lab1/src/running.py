@@ -10,7 +10,7 @@ import matplotlib.ticker as mtick
 
 # Options
 # General
-taskno = 0
+taskno = 2
 
 # Graph
 groupno = 8
@@ -19,6 +19,7 @@ labels = ["mnk", "t_mnk", "mnkkmn_b32", "mnk_lu2", "grade2"]
 xtitle = 'Different implementations of compute kernel'
 ytitle = 'Speedup'
 
+# Following Part should not be modified
 Test_Flag = True
 Make_Graph_Flag = True
 path = sys.path[0]
@@ -46,19 +47,20 @@ if __name__ == "__main__":
 
 if path[-1] != '/':
     path = path + '/'
-print("Path OK.")
 os.chdir(path)
+if not os.path.exists(f"{path}result"):
+    os.system("mkdir result")
 
 # Running Test
 def RunTest():
-    if os.path.exists(f"{path}tasks{taskno}_result"):
-        os.system(f"rm -f tasks{taskno}_result")
+    if os.path.exists(f"{path}result/tasks{taskno}_result"):
+        os.system(f"rm -f ./result/tasks{taskno}_result")
         print("Result File Clear.")
 
     print(f"\"tasks{taskno}\" Start")
     for i in range(1, groupno+1):
         print(f"Test Group {i}")
-        os.system(f"make tasks{taskno} I={i} >> tasks{taskno}_result")
+        os.system(f"make tasks{taskno} I={i} >> ./result/tasks{taskno}_result")
         
 # Make Graph
 def getNum(testdata):
@@ -85,10 +87,10 @@ def MakeGraph():
                     'size': 13,
                     'c': 'black'}
     # Check Graph
-    if os.path.exists(f"{path}task{taskno}.png"):
+    if os.path.exists(f"{path}result/task{taskno}.png"):
         os.system(f"rm -f task{taskno}.png")
         print("Graph Clear.")
-    testdata = open(f"tasks{taskno}_result",'r')
+    testdata = open(f"./result/tasks{taskno}_result",'r')
     data = []
     for i in range (groupno):
         base = getNum(testdata)
@@ -106,14 +108,13 @@ def MakeGraph():
     plt.xlabel('Different implementations of compute kernel', normalFont)
     plt.ylabel('Speedup', normalFont)
     plt.title(title, titleFont)
+    ax.yaxis.set_major_locator(mtick.MultipleLocator(1))
     ax.yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2f'))
-
     # Draw lines
-    for i in range (1,8):
-        plt.axhline(i, linestyle='--', linewidth=0.5, c='grey')
+    plt.grid(True, ls='--', axis='y')
 
     ax.legend()
-    plt.savefig(f'./task{taskno}.png')
+    plt.savefig(f'{path}result/task{taskno}.png')
 
 # Main
 if Test_Flag:
