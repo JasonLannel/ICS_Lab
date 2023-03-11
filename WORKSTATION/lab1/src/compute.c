@@ -103,13 +103,13 @@ void compute_y_transpose_mnk() {
 void compute_row_major_mnkkmn_b32() {
     // TODO: task 2
     zero_z();
-    for (int i = 0; i != m / 32; ++i) {
-        for (int j = 0; j != n / 32; ++j) {
-            for (int l = 0; l != k / 32; ++l) {
-                for (int ll = 0; ll != 32; ++ll) {
-                    for (int ii = 0; ii != 32; ++ii) {
-                        for (int jj = 0; jj != 32; ++jj) {
-                            Z[i * 32 + ii][j * 32 + jj] += X[i * 32 + ii][l * 32 + ll] * YP[j * 32 + jj][l * 32 + ll]; // Wise man Peiwen was frustrated at that he should spent more than one second on it, /fnnnnnnnnnnn
+    for (int i = 0; i != (m >> 5) + 1; ++i) {
+        for (int j = 0; j != (n >> 5) + 1; ++j) {
+            for (int l = 0; l != (k >> 5) + 1; ++l) {
+                for (int ll = 0; ll != 32 && (l << 5) + ll != k; ++ll) {
+                    for (int ii = 0; ii != 32 && (i << 5) + ii != m; ++ii) {
+                        for (int jj = 0; jj != 32 && (j << 5) + jj != n; ++jj){
+                            Z[(i << 5) + ii][(j << 5) + jj] += X[(i << 5) + ii][(l << 5) + ll] * Y[(l << 5) + ll][(j << 5) + jj];
                         }
                     }
                 }
@@ -133,13 +133,13 @@ void compute_row_major_mnk_lu2() {
     }
 }
 
-void my_kernel(){
+void compute_my_kernel(){
     // TODO: task 2
     zero_z();
-    int liml = k>>2;
+    int liml = (k>>2)<<2;
     for (int i = 0; i != m; ++i) {
         for (int j = 0; j != n; ++j) {
-            for (int l = 0; l < liml; l+=4) {
+            for (int l = 0; l != liml; l+=4) {
                 Z[i][j] += X[i][l] * YP[j][l];
                 Z[i][j] += X[i][l+1] * YP[j][l+1];
                 Z[i][j] += X[i][l+2] * YP[j][l+2];
@@ -215,6 +215,10 @@ uint64_t compute() {
         case COMPUTE_ROW_MAJOR_MNK_LU2:
             //printf("COMPUTE_ROW_MAJOR_MNK_LU2\n");
             compute_row_major_mnk_lu2();
+            break;
+        case COMPUTE_MY_KERNEL:
+            //printf("COMPUTE_ROW_MAJOR_MNK_LU2\n");
+            compute_my_kernel();
             break;
         case COMPUTE_SIMD:
             //printf("COMPUTE_SIMD\n");

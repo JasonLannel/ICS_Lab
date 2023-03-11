@@ -60,3 +60,63 @@ Elapsed time (Human readable): 194s 723ms 632us 597ns
 Elapsed time (Machine readable): 194723632597
 Elapsed time (Human readable): 188s 310ms 696us 52ns
 Elapsed time (Machine readable): 188310696052
+
+$ make tasks1 I=5
+Task 1
+Elapsed time (Human readable): 4s 373ms 240us 524ns
+Elapsed time (Machine readable): 4373240524
+Elapsed time (Human readable): 0s 882ms 726us 349ns
+Elapsed time (Machine readable): 882726349
+Elapsed time (Human readable): 1s 54ms 412us 724ns
+Elapsed time (Machine readable): 1054412724
+Elapsed time (Human readable): 3s 215ms 508us 225ns
+Elapsed time (Machine readable): 3215508225
+Elapsed time (Human readable): 8s 27ms 491us 391ns
+Elapsed time (Machine readable): 8027491391
+Elapsed time (Human readable): 8s 60ms 946us 780ns
+Elapsed time (Machine readable): 8060946780
+
+$ make tasks1 I=6
+Task 1
+Elapsed time (Human readable): 4s 287ms 908us 572ns
+Elapsed time (Machine readable): 4287908572
+Elapsed time (Human readable): 0s 846ms 594us 570ns
+Elapsed time (Machine readable): 846594570
+Elapsed time (Human readable): 0s 955ms 560us 687ns
+Elapsed time (Machine readable): 955560687
+Elapsed time (Human readable): 4s 129ms 981us 188ns
+Elapsed time (Machine readable): 4129981188
+Elapsed time (Human readable): 6s 622ms 273us 932ns
+Elapsed time (Machine readable): 6622273932
+Elapsed time (Human readable): 6s 824ms 61us 795ns
+Elapsed time (Machine readable): 6824061795
+
+make tasks1 I=7
+Task 1
+Elapsed time (Human readable): 21s 165ms 708us 892ns
+Elapsed time (Machine readable): 21165708892
+Elapsed time (Human readable): 3s 480ms 808us 234ns
+Elapsed time (Machine readable): 3480808234
+Elapsed time (Human readable): 4s 228ms 843us 630ns
+Elapsed time (Machine readable): 4228843630
+Elapsed time (Human readable): 20s 618ms 778us 139ns
+Elapsed time (Machine readable): 20618778139
+Elapsed time (Human readable): 34s 288ms 885us 745ns
+Elapsed time (Machine readable): 34288885745
+Elapsed time (Human readable): 34s 338ms 14us 231ns
+Elapsed time (Machine readable): 34338014231
+
+$ make tasks1 I=8
+Task 1
+Elapsed time (Human readable): 21s 641ms 473us 212ns
+Elapsed time (Machine readable): 21641473212
+Elapsed time (Human readable): 3s 322ms 675us 770ns
+Elapsed time (Machine readable): 3322675770
+Elapsed time (Human readable): 3s 799ms 818us 937ns
+Elapsed time (Machine readable): 3799818937
+Elapsed time (Human readable): 21s 526ms 16us 878ns
+Elapsed time (Machine readable): 21526016878
+Elapsed time (Human readable): 31s 840ms 542us 338ns
+Elapsed time (Machine readable): 31840542338
+Elapsed time (Human readable): 33s 170ms 503us 205ns
+Elapsed time (Machine readable): 33170503205
