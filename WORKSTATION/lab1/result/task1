@@ -1,0 +1,62 @@
+$ make tasks1 I=1
+Task 1
+Elapsed time (Human readable): 93s 507ms 362us 733ns
+Elapsed time (Machine readable): 93507362733
+Elapsed time (Human readable): 13s 420ms 885us 849ns
+Elapsed time (Machine readable): 13420885849
+Elapsed time (Human readable): 15s 237ms 203us 985ns
+Elapsed time (Machine readable): 15237203985
+Elapsed time (Human readable): 89s 20ms 105us 373ns
+Elapsed time (Machine readable): 89020105373
+Elapsed time (Human readable): 138s 89ms 429us 258ns
+Elapsed time (Machine readable): 138089429258
+Elapsed time (Human readable): 138s 329ms 958us 753ns
+Elapsed time (Machine readable): 138329958753
+
+
+$ make tasks1 I=2
+Task 1
+Elapsed time (Human readable): 0s 45ms 994us 856ns
+Elapsed time (Machine readable): 45994856
+Elapsed time (Human readable): 0s 26ms 129us 408ns
+Elapsed time (Machine readable): 26129408
+Elapsed time (Human readable): 0s 14ms 502us 590ns
+Elapsed time (Machine readable): 14502590
+Elapsed time (Human readable): 0s 45ms 485us 336ns
+Elapsed time (Machine readable): 45485336
+Elapsed time (Human readable): 0s 28ms 414us 829ns
+Elapsed time (Machine readable): 28414829
+Elapsed time (Human readable): 0s 14ms 68us 110ns
+Elapsed time (Machine readable): 14068110
+
+
+$ make tasks1 I=3
+Task 1
+Elapsed time (Human readable): 2s 949ms 7us 227ns
+Elapsed time (Machine readable): 2949007227
+Elapsed time (Human readable): 0s 596ms 557us 783ns
+Elapsed time (Machine readable): 596557783
+Elapsed time (Human readable): 0s 506ms 34us 751ns
+Elapsed time (Machine readable): 506034751
+Elapsed time (Human readable): 2s 925ms 492us 980ns
+Elapsed time (Machine readable): 2925492980
+Elapsed time (Human readable): 1s 184ms 838us 309ns
+Elapsed time (Machine readable): 1184838309
+Elapsed time (Human readable): 0s 845ms 663us 364ns
+Elapsed time (Machine readable): 845663364
+
+
+$ make tasks1 I=4
+Task 1
+Elapsed time (Human readable): 186s 198ms 685us 325ns
+Elapsed time (Machine readable): 186198685325
+Elapsed time (Human readable): 28s 286ms 159us 320ns
+Elapsed time (Machine readable): 28286159320
+Elapsed time (Human readable): 32s 546ms 425us 29ns
+Elapsed time (Machine readable): 32546425029
+Elapsed time (Human readable): 186s 675ms 732us 805ns
+Elapsed time (Machine readable): 186675732805
+Elapsed time (Human readable): 194s 723ms 632us 597ns
+Elapsed time (Machine readable): 194723632597
+Elapsed time (Human readable): 188s 310ms 696us 52ns
+Elapsed time (Machine readable): 188310696052
