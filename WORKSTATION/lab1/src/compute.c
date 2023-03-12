@@ -136,21 +136,161 @@ void compute_row_major_mnk_lu2() {
 void compute_my_kernel(){
     // TODO: task 2
     zero_z();
-    int liml = (k>>2)<<2;
-    for (int i = 0; i != m; ++i) {
-        for (int j = 0; j != n; ++j) {
-            for (int l = 0; l != liml; l+=4) {
-                Z[i][j] += X[i][l] * YP[j][l];
-                Z[i][j] += X[i][l+1] * YP[j][l+1];
-                Z[i][j] += X[i][l+2] * YP[j][l+2];
-                Z[i][j] += X[i][l+3] * YP[j][l+3];
+    int liml = (k >> 3) << 3;
+    int r = k - liml;
+    if(r == 0){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
             }
-            if(k&1){
-                Z[i][j] += X[i][k-1] * YP[j][k-1];
+        }
+    }
+    else if(r == 1){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
             }
-            if(k&2){
-                Z[i][j] += X[i][k-2] * YP[j][k-2];
-                Z[i][j] += X[i][k-3] * YP[j][k-3];
+        }
+    }
+    else if(r == 2){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+            }
+        }
+    }
+    else if(r == 3){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+                Z[i][j] += X[i][k - 3] * YP[j][k - 3];
+            }
+        }
+    }
+    else if(r == 4){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+                Z[i][j] += X[i][k - 3] * YP[j][k - 3];
+                Z[i][j] += X[i][k - 4] * YP[j][k - 4];
+            }
+        }
+    }
+    else if(r == 5){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+                Z[i][j] += X[i][k - 3] * YP[j][k - 3];
+                Z[i][j] += X[i][k - 4] * YP[j][k - 4];
+                Z[i][j] += X[i][k - 5] * YP[j][k - 5];
+            }
+        }
+    }
+    else if(r == 6){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+                Z[i][j] += X[i][k - 3] * YP[j][k - 3];
+                Z[i][j] += X[i][k - 4] * YP[j][k - 4];
+                Z[i][j] += X[i][k - 5] * YP[j][k - 5];
+                Z[i][j] += X[i][k - 6] * YP[j][k - 6];
+            }
+        }
+    }
+    else if(r == 7){
+        for (int i = 0; i != m; ++i) {
+            for (int j = 0; j != m; ++j) {
+                for (int l = 0; l != liml; l += 8) {
+                    Z[i][j] += X[i][l] * YP[j][l];
+                    Z[i][j] += X[i][l+1] * YP[j][l+1];
+                    Z[i][j] += X[i][l+2] * YP[j][l+2];
+                    Z[i][j] += X[i][l+3] * YP[j][l+3];
+                    Z[i][j] += X[i][l+4] * YP[j][l+4];
+                    Z[i][j] += X[i][l+5] * YP[j][l+5];
+                    Z[i][j] += X[i][l+6] * YP[j][l+6];
+                    Z[i][j] += X[i][l+7] * YP[j][l+7];
+                }
+                Z[i][j] += X[i][k - 1] * YP[j][k - 1];
+                Z[i][j] += X[i][k - 2] * YP[j][k - 2];
+                Z[i][j] += X[i][k - 3] * YP[j][k - 3];
+                Z[i][j] += X[i][k - 4] * YP[j][k - 4];
+                Z[i][j] += X[i][k - 5] * YP[j][k - 5];
+                Z[i][j] += X[i][k - 6] * YP[j][k - 6];
+                Z[i][j] += X[i][k - 7] * YP[j][k - 7];
             }
         }
     }
