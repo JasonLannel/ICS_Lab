@@ -99,8 +99,8 @@ def MakeGraph():
             x = getNum(testdata)
             d.append(base/x)
         data.append(d)
-    fig, ax = plt.subplots(figsize=(8 * (kernelno / 6), 5), dpi=100)
-    width = 0.1 * (groupno / 8)
+    fig, ax = plt.subplots(figsize=(10 * (kernelno / 6), 8 * (kernelno / 6)), dpi=100)
+    width = 0.1 / (groupno / 8)
     for i in range (groupno):
         no = i + 1
         ax.bar(np.arange(len(data[i])) + width * i, data[i], width=width, tick_label=labels, label=f"{no}.txt")
