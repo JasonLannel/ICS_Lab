@@ -298,7 +298,30 @@ void compute_my_kernel(){
 
 void compute_simd() {
 #ifdef SIMD
-    // TODO: task 3
+    zero_z();
+    int liml = (k >> 3) << 3;
+    int temp[4]={};
+    for (int i = 0; i != m; ++i) {
+        for (int j = 0; j != n; ++j) {
+            for (int l = 0; l != liml; l += 8) {
+                int32x4_t X_4 = vld1q_s32((const int32_t *)X + i * k + l);
+                int32x4_t YP_4 = vld1q_s32((const int32_t *)YP + j * k + l);
+                int32x4_t Z_4 = vmulq_s32(X_4, YP_4);
+                int32x4_t X_8 = vld1q_s32((const int32_t *)X + i * k + l + 4);
+                int32x4_t YP_8 = vld1q_s32((const int32_t *)YP + j * k + l + 4);
+                int32x4_t Z_8 = vmulq_s32(X_8, YP_8);
+                Z_8 = vaddq_s32(Z_4, Z_8);
+                vst1q_s32(temp, Z_8);
+                Z[i][j] += temp[0];
+                Z[i][j] += temp[1];
+                Z[i][j] += temp[2];
+                Z[i][j] += temp[3];
+            }
+            for (int ll = liml; ll != k; ++ll) {
+                Z[i][j] += X[i][ll] * YP[j][ll];
+            }
+        }
+    }
 #endif
 }
 
